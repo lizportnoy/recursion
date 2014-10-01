@@ -50,14 +50,13 @@ var getElementsByClassName = function(className){
 						return checkParents(currentNode)
 					}
 				}
-				checkParents(currentNode);
+				return checkParents(currentNode);
 			} 
 		};
 
 	};
 
-	getElements(currentNode); 
-	return elementArray;
+	return getElements(currentNode); 
 	$('.stopsearch').remove();
 
 };
