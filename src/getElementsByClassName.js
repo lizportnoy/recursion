@@ -6,7 +6,7 @@
 // But instead we're going to implement it from scratch:
 //You should use document.body, element.childNodes, and element.classList
 
-var getElementsByClassName = function(className){
+/*var getElementsByClassName = function(className){
 	var elementArray = []; // to store resulting elements from code
 	var currentNode = document.body; // beginning search
 	$('body').after('<p class="stopsearch"></p>');
@@ -59,4 +59,36 @@ var getElementsByClassName = function(className){
 	return getElements(currentNode); 
 	$('.stopsearch').remove();
 
+};*/
+
+
+// rethinking get Elements By className
+
+var getElementsByClassName = function(className){
+
+	var elementsArray = [];
+
+	var recurseBody = function(node) {
+
+			if (node.classList !== undefined) {
+				for (var i = 0; i <node.classList.length; i ++) {
+					if (node.classList[i] === className) {
+						elementsArray.push(node);
+					} 
+				}
+			}
+
+			if (node.childNodes.length > 0) {
+				for (var i = 0; i < node.childNodes.length; i++) {
+				recurseBody(node.childNodes[i])}
+			} 
+
+	};
+
+	recurseBody(document.body);
+	return elementsArray;
+
 };
+
+
+
