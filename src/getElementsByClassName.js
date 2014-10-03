@@ -6,71 +6,15 @@
 // But instead we're going to implement it from scratch:
 //You should use document.body, element.childNodes, and element.classList
 
-/*var getElementsByClassName = function(className){
-	var elementArray = []; // to store resulting elements from code
-	var currentNode = document.body; // beginning search
-	$('body').after('<p class="stopsearch"></p>');
-	
-
-	var getElements = function (currentNode) {
-	// base case = after no more child nodes or subnodes of document.body are left to explore, return elementArray
-		if (currentNode === document.body.nextSibling) {
-			return elementArray;
-		}
-		// runs through node
-		else { 
-			// Checks if node has className and stores element in array if it does
-			if (currentNode.classList !== undefined) {
-				for (var i = 0; i <currentNode.classList.length; i ++) {
-					if (currentNode.classList[i] === className) {
-					elementArray.push(currentNode);
-					} 
-				}
-			}
-		
-			// checks if node has child and if so puts it through recursion
-			if (currentNode.childNodes[0] !== undefined) {
-				currentNode = currentNode.childNodes[0];
-				return getElements(currentNode);
-			}
-
-			// if node doesn't have child, checks for next sibling and if exists puts it through recursion
-			else if (currentNode.nextSibling !== null ) {
-				currentNode = currentNode.nextSibling;
-				return getElements(currentNode);
-			}
-
-			else {
-				var checkParents = function (currentNode) {
-					if (currentNode.parentNode.nextSibling !== null) {
-						currentNode = currentNode.parentNode.nextSibling;
-						return getElements(currentNode); }
-					else {
-						currentNode = currentNode.parentNode
-						return checkParents(currentNode)
-					}
-				}
-				return checkParents(currentNode);
-			} 
-		};
-
-	};
-
-	return getElements(currentNode); 
-	$('.stopsearch').remove();
-
-};*/
-
-
 // rethinking get Elements By className
 
 var getElementsByClassName = function(className){
 
-	var elementsArray = [];
+	var elementsArray = []; // for storing elements with the target class name
 
 	var recurseBody = function(node) {
 
-			if (node.classList !== undefined) {
+			if (node.classList !== undefined) { // adds any elements with the selected class name to the array
 				for (var i = 0; i <node.classList.length; i ++) {
 					if (node.classList[i] === className) {
 						elementsArray.push(node);
@@ -78,15 +22,15 @@ var getElementsByClassName = function(className){
 				}
 			}
 
-			if (node.childNodes.length > 0) {
+			if (node.childNodes.length > 0) { // goes through all child nodes and recurses if there are child node
 				for (var i = 0; i < node.childNodes.length; i++) {
-				recurseBody(node.childNodes[i])}
+				recurseBody(node.childNodes)}
 			} 
 
 	};
 
-	recurseBody(document.body);
-	return elementsArray;
+	recurseBody(document.body); // runs function, beginning with document.body and then goes through children
+	return elementsArray; // returns array of elements
 
 };
 
