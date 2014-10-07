@@ -22,9 +22,10 @@ var getElementsByClassName = function(className){
 				}
 			}
 
-			if (node.childNodes.length > 0) { // goes through all child nodes and recurses if there are child node
+			if (node.childNodes !== undefined) { // goes through all child nodes and recurses if there are child node
 				for (var i = 0; i < node.childNodes.length; i++) {
-				recurseBody(node.childNodes)}
+					recurseBody(node.childNodes[i]);
+				}
 			} 
 
 	};
